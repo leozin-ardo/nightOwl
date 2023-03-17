@@ -1,18 +1,16 @@
 pipeline {
     agent any
-    tools { nodejs 'node' }
+    tools {
+        nodejs 'node'
+        git 'git'
+    }
 
     stages {
         stage('Update project') {
             steps {
-                script {
-                    if (fileExists('yarn.lock')) {
-                        sh 'git pull https://github.com/leozin-ardo/nightOwl.git dev --rebase'
-                    } else {
-                        sh 'git clone "https://github.com/leozin-ardo/nightOwl.git"'
-                        sh 'git checkout origin/dev'
-                    }
-                }
+                checkout([$class: 'GitSCM', branches: [[name: '*/dev']],
+    userRemoteConfigs: [[url: 'git@github.com:leozin-ardo/nightOwl.git',
+     credentialsId: '69f57908-d9e0-4ed6-8d89-0898805f2364']]])
             }
         }
         stage('Install project') {
@@ -22,15 +20,7 @@ pipeline {
         }
         stage('test') {
             steps {
-                echo 'testing'
                 sh 'yarn test'
-                echo 'test done ✔️'
-            }
-        }
-        stage('merge homolog') {
-            steps {
-                sh 'git checkout origin/homolog'
-                sh 'git merge origin/dev'
             }
         }
     }
