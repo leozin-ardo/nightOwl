@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Clonning project') {
             steps {
-                git  'https://github.com/leozin-ardo/nightOwl.git'
+                git 'https://github.com/leozin-ardo/nightOwl.git'
             }
         }
         stage('Install project') {
