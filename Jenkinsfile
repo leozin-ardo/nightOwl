@@ -12,7 +12,7 @@ pipeline {
             steps {
                 checkout scmGit(
     branches: [[name: 'dev']],
-    userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-plugin.git']])
+    userRemoteConfigs: [[url: 'https://github.com/leozin-ardo/nightOwl.git']])
             }
         }
         stage('Install project') {
