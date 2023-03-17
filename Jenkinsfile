@@ -8,11 +8,11 @@ pipeline {
                 git 'https://github.com/leozin-ardo/nightOwl.git'
             }
         }
-        stage('Change branch to dev') {
-            steps {
-                sh 'git checkout dev'
-            }
-        }
+        // stage('Change branch to dev') {
+        //     steps {
+        //         sh 'git checkout dev'
+        //     }
+        // }
         stage('Install project') {
             steps {
                 sh 'yarn'
