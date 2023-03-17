@@ -8,13 +8,6 @@ pipeline {
                 git  'https://github.com/leozin-ardo/nightOwl.git'
             }
         }
-        stage('Change branch to dev') {
-            steps {
-                checkout scmGit(
-    branches: [[name: 'dev']],
-    userRemoteConfigs: [[url: 'https://github.com/leozin-ardo/nightOwl.git']])
-            }
-        }
         stage('Install project') {
             steps {
                 sh 'yarn'
