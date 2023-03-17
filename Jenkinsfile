@@ -10,19 +10,19 @@ pipeline {
         }
         stage('Change branch to dev') {
             steps {
-                git checkout dev
+                sh 'git checkout dev'
             }
         }
         stage('Install project') {
             steps {
-                yarn
+                sh 'yarn'
             }
         }
         stage('test') {
             steps {
-                echo('testing')
-                yarn test
-                echo('test done ✔️')
+                echo 'testing'
+                sh 'yarn test'
+                echo 'test done ✔️'
             }
         }
     }
