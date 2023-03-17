@@ -1,11 +1,18 @@
 pipeline {
     agent any
-    tools { nodejs 'node', git 'git' }
+    tools { nodejs 'node' }
 
     stages {
-        stage('Clonning project') {
+        stage('Update project') {
             steps {
-                git 'https://github.com/leozin-ardo/nightOwl.git'
+                script {
+                    if (fileExists('yarn.lock')) {
+                        sh 'git pull https://github.com/leozin-ardo/nightOwl.git dev --rebase'
+                    } else {
+                        sh 'git clone "https://github.com/leozin-ardo/nightOwl.git"'
+                        sh 'git checkout origin/dev'
+                    }
+                }
             }
         }
         stage('Install project') {
@@ -18,6 +25,12 @@ pipeline {
                 echo 'testing'
                 sh 'yarn test'
                 echo 'test done ✔️'
+            }
+        }
+        stage('merge homolog') {
+            steps {
+                sh 'git checkout origin/homolog'
+                sh 'git merge origin/dev'
             }
         }
     }
