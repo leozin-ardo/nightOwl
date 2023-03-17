@@ -10,7 +10,9 @@ pipeline {
         }
         stage('Change branch to dev') {
             steps {
-                sh 'git checkout dev'
+                checkout scmGit(
+    branches: [[name: 'dev']],
+    userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-plugin.git']])
             }
         }
         stage('Install project') {
