@@ -5,15 +5,10 @@ import { NO_CONTENT, CREATED } from 'http-status';
 
 @Controller('ticket')
 export class TicketController {
-  constructor(private readonly TicketService: TicketService) {}
-
-  @Get()
-  getTicket(): string {
-    return 'ticket';
-  }
-
+  constructor(private readonly ticketService: TicketService) {}
+  
   @Post('/sold')
-  async soldTicket(@Body() ticket: buyTicketDTO) {
-    return await this.TicketService.buyTicket(ticket);
+  async soldTicketRoute(@Body() ticket: buyTicketDTO) {
+    return await this.ticketService.buyTicket(ticket);
   }
 }

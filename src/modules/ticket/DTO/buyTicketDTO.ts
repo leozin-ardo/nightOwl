@@ -1,7 +1,7 @@
-import Event from "../domain/Event";
+import Event from '../../event/domain/Event';
 
 // TODO: change event to event_id after create event Controller.
-export type buyTicketDTO = {
+export interface buyTicketDTO {
   user_id: string;
-  event: Event;
-};
+  event_id: string;
+}

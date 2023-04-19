@@ -5,12 +5,14 @@ import { TicketModule } from '../ticket/index';
 
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from '../auth';
 
 @Module({
   imports: [
     TicketModule,
     ConfigModule.forRoot({ envFilePath: './dev.env' }),
     MongooseModule.forRoot(process.env.MONGODB_URL),
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

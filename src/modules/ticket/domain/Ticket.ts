@@ -1,17 +1,17 @@
-import Event from './Event';
+import Event from '../../event/domain/Event';
 
-interface IEvent {
+interface ITicket {
   readonly event: Event;
   readonly expiration_date: Date;
   readonly user_id: string;
 }
 
-export default class implements IEvent {
+export default class implements ITicket {
   readonly event: Event;
   readonly expiration_date: Date;
   readonly user_id: string;
 
-  constructor(event: IEvent) {
-    Object.assign(this, event);
+  constructor(ticket: ITicket) {
+    Object.assign(this, ticket);
   }
 }

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import Event from '../domain/Event';
+import Event from '../../event/domain/Event';
 import { HydratedDocument } from 'mongoose';
 
 export type TicketDocument = HydratedDocument<Ticket>;
