@@ -23,6 +23,8 @@ export class AuthService {
   authenticate = async (user: AuthDTO) => {
     try {
       const { password, username } = user || {};
+
+      // TODO ADD CACHE
       const findUser = await this.userModel.findOne({ username });
 
       if (findUser.username) {
@@ -31,11 +33,18 @@ export class AuthService {
           hashTextToCompare: findUser.password,
         });
 
+        const tokenConfig = {
+          secret: process.env.JWT_SECRET,
+          expiresIn: 604800,
+        };
+
+        const userData = new User(findUser).toJson();
+
         if (isTheSamePass)
-          this.jwtService.signAsync(JSON.stringify(new User(findUser)), {
-            secret: process.env.JWT_SECRET,
-            expiresIn: '7d',
-          });
+          return {
+            token: await this.jwtService.signAsync(userData, tokenConfig),
+            expiresIn: tokenConfig.expiresIn,
+          };
         else throw new UnauthorizedCredentialsException('Password wrong');
       }
     } catch (err) {

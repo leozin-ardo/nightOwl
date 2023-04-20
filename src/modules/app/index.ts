@@ -6,9 +6,11 @@ import { TicketModule } from '../ticket/index';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from '../auth';
+import { EventModule } from '../event';
 
 @Module({
   imports: [
+    EventModule,
     TicketModule,
     ConfigModule.forRoot({ envFilePath: './dev.env' }),
     MongooseModule.forRoot(process.env.MONGODB_URL),

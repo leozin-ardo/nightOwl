@@ -5,7 +5,7 @@ interface IUser {
   password: string;
 }
 
-export default class User{
+export default class User {
   readonly firstname: string;
   readonly lastname: string;
   readonly password: string;
@@ -15,4 +15,10 @@ export default class User{
   constructor(user: IUser) {
     Object.assign(this, user);
   }
+
+  toJson = () => ({
+    username: this.username,
+    password: this.password,
+    identifier: this.identfier,
+  });
 }
